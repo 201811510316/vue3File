@@ -8,11 +8,12 @@
               <span>vue3 admin</span>
             </div>
         </div>
-        <AsideModal/>
+        <AsideModal ref="asideModalRef"/>
       </el-aside>
       <el-container>
         <!-- 顶栏容器 -->
-        <el-header><HeaderModal/></el-header>
+        <el-header><HeaderModal @emitDemo="mainFunction"/></el-header>
+        
         <!-- 主要区域容器 -->
         <el-main><router-view/></el-main>
       </el-container>
@@ -20,8 +21,15 @@
 </template>
 
 <script setup>
+import {ref} from 'vue';
 import AsideModal from '@/layout/aside/AsideModal.vue';
 import HeaderModal from '@/layout/header/HeaderModal.vue';
+
+const asideModalRef = ref();
+
+function mainFunction() {
+  asideModalRef.value.isCollapseFun();
+}
 
 </script>
 
@@ -49,7 +57,7 @@ import HeaderModal from '@/layout/header/HeaderModal.vue';
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60px;
+  height: 66px;
 }
 .head > div {
   display: flex;

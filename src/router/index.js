@@ -12,20 +12,41 @@ const routes = [
 		component: () => import('@/view/login/NewLogin.vue'),
 	},
   {
+    path:'/report',
+    name:'report',
+    component: Layout,
+    children:[
+      {
+          path:'/userMain',
+          name:'user-main',
+          component:() => import('@/view/admin/UserMainModal.vue'),
+          meta: {
+            title: '个人信息',
+          }
+      },
+    ]
+  },
+  {
     path:'/main',
     name:'main',
     component: Layout,
     children:[
       {
-              path:'/index', // 首页的路由
-              name:'Index',
-              component:() => import('@/view/mine/lianxi-1/IndexModal.vue')
-          },
-          {
-              path:'/setting', // 设置页面的路由
-              name:'Setting',
-              component:() => import('@/view/mine/lianxi-1/SettingModal.vue')
+          path:'/index', 
+          name:'Index',
+          component:() => import('@/view/mine/lianxi-1/IndexModal.vue'),
+          meta: {
+            title: '选项1',
           }
+      },
+      {
+          path:'/setting',
+          name:'Setting',
+          component:() => import('@/view/mine/lianxi-1/SettingModal.vue'),
+          meta: {
+            title: '选项2',
+          }
+      }
     ]
   },
   {
@@ -36,25 +57,34 @@ const routes = [
       {
               path:'/admin',
               name:'admin',
-              component:() => import('@/view/admin/userDataModal.vue')
+              component:() => import('@/view/admin/userDataModal.vue'),
+              meta: {
+                title: '选项3',
+              }
           },
           {
               path:'/lianxi-2',
               name:'lianxi-2',
-              component:() => import('@/view/mine/lianxi-2/IndexModal.vue')
+              component:() => import('@/view/mine/lianxi-2/IndexModal.vue'),
+              meta: {
+                title: '选项4',
+              }
           }
     ]
   },
   {
-    path:'/report',
-    name:'report',
+    path:'/lianxi',
+    name:'lianxi',
     component: Layout,
     children:[
       {
-              path:'/lianxi-3',
-              name:'lianxi-3',
-              component:() => import('@/view/mine/lianxi-3/indexModal.vue')
-          },
+        path:'/lianxi-3',
+        name:'lianxi-3',
+          component:() => import('@/view/mine/lianxi-3/indexModal.vue'),
+          meta: {
+            title: '选项5',
+          }
+      },
     ]
   },
 	{

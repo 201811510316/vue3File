@@ -40,7 +40,7 @@ const rules = reactive({
 
 // 登录
 function submitForm(){
-    router.replace('/index');
+    router.replace('/userMain');
 }
 
 
