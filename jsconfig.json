@@ -3,6 +3,10 @@
     "target": "es5",
     "module": "esnext",
     "baseUrl": "./",
+<<<<<<< HEAD
+=======
+    "allowJs": true,
+>>>>>>> 提交vue+element-ui代码
     "moduleResolution": "node",
     "paths": {
       "@/*": [
@@ -16,4 +20,8 @@
       "scripthost"
     ]
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 提交vue+element-ui代码
