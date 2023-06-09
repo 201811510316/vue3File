@@ -33,7 +33,6 @@
 
 <script setup>
 import {ref, reactive, computed} from 'vue';
-import {Location,Setting,Document,User} from '@element-plus/icons-vue';
 import store from '@/store';
 import {useRouter} from "vue-router";
 
@@ -44,50 +43,59 @@ const menu = reactive([
         path:'/userMain',
         name:'user-main',
         label:'个人信息',
-        url:'admin/UserMainModal'
+        url:'admin/UserMainModal',
+        icon: 'user',
     },
     {
         label: '导航一',
+        icon: 'setting',
         children: [
             {
               path: '/index',
               name: 'Index',
               label: '选项1',
-              url: 'mine/lianxi-1/IndexModal'
+              url: 'mine/lianxi-1/IndexModal',
+              fatcher:'导航一'
             },
             {
               path: '/setting',
               name: 'Setting',
               label: '选项2',
-              url: 'mine/lianxi-1/SettingModal'
+              url: 'mine/lianxi-1/SettingModal',
+              fatcher:'导航一'
             }
         ]
     },
     {
         label: '导航二',
+        icon: 'document',
         children: [
             {
               path:'/admin',
               name:'admin',
               label: '选项3',
-              url: 'admin/userDataModal'
+              url: 'admin/userDataModal',
+              fatcher:'导航二'
             },
             {
               path:'/lianxi-2',
               name:'lianxi-2',
               label: '选项4',
-              url: 'mine/lianxi-2/IndexModal'
+              url: 'mine/lianxi-2/IndexModal',
+              fatcher:'导航二'
             }
         ]
     },
     {
         label: '导航三',
+        icon: 'data',
         children: [
             {
                 path:'/lianxi-3',
                 name:'lianxi-3',
                 label: '选项5',
-                url: 'mine/lianxi-3/indexModal'
+                url: 'mine/lianxi-3/indexModal',
+                fatcher:'导航三'
             },
         ]
     },

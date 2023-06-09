@@ -17,7 +17,6 @@
             <el-menu-item index="1"><div class="my-1">处理中心</div></el-menu-item>
             <el-sub-menu index="2">
                 <template v-slot:title>我的工作台</template>
-                <el-menu-item index="2-1"><div @click="userData">个人信息</div></el-menu-item>
                 <el-menu-item index="2-2"><div @click="rePass">重置密码</div></el-menu-item>
                 <el-menu-item index="2-3"><div @click="logout">退出登录</div></el-menu-item>
             </el-sub-menu>
@@ -37,11 +36,6 @@ const emit = defineEmits(['emitDemo'])
 const router = useRouter();
 const dialogFormRef = ref();
 
-
-// 查看个人信息
-function userData() {
-    console.log("个人信息")
-}
 // 重置密码
 function rePass(){
   dialogFormRef.value.dialogFormVisibleFun();

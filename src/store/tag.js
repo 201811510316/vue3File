@@ -7,6 +7,7 @@ export default {
                 path:'/userMain',
                 name:'user-main',
                 label: '个人信息',
+                url:'admin/UserMainModal',
             }
         ]
     },

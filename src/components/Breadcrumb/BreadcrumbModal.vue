@@ -5,6 +5,9 @@
                 个人信息
             </el-breadcrumb-item>
             <el-breadcrumb-item :to="current.path" v-if="current">
+                {{ current.fatcher }}
+            </el-breadcrumb-item>
+            <el-breadcrumb-item :to="current.path" v-if="current">
                 {{ current.label }}
             </el-breadcrumb-item>
       </el-breadcrumb>

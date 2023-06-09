@@ -49,48 +49,48 @@ const routes = [
       }
     ]
   },
-  {
-    path:'/user',
-    name:'user',
-    component: Layout,
-    children:[
-      {
-              path:'/admin',
-              name:'admin',
-              component:() => import('@/view/admin/userDataModal'),
-              meta: {
-                title: '选项3',
-              }
-          },
-          {
-              path:'/lianxi-2',
-              name:'lianxi-2',
-              component:() => import('@/view/mine/lianxi-2/IndexModal'),
-              meta: {
-                title: '选项4',
-              }
+    {
+      path:'/user',
+      name:'user',
+      component: Layout,
+      children:[
+        {
+          path:'/admin',
+          name:'admin',
+          component:() => import('@/view/admin/userDataModal'),
+          meta: {
+            title: '选项3',
           }
-    ]
-  },
-  {
-    path:'/lianxi',
-    name:'lianxi',
-    component: Layout,
-    children:[
-      {
-        path:'/lianxi-3',
-        name:'lianxi-3',
+        },
+        {
+          path:'/lianxi-2',
+          name:'lianxi-2',
+          component:() => import('@/view/mine/lianxi-2/IndexModal'),
+          meta: {
+            title: '选项4',
+          }
+        }
+      ]
+    },
+    {
+      path:'/lianxi',
+      name:'lianxi',
+      component: Layout,
+      children:[
+        {
+          path:'/lianxi-3',
+          name:'lianxi-3',
           component:() => import('@/view/mine/lianxi-3/indexModal'),
           meta: {
             title: '选项5',
           }
-      },
-    ]
-  },
-	{
-        path:'/*', 
-        name:'404',
-        component: () => import('@/view/ErrorModal.vue')
+        },
+      ]
+    },
+    {
+      path:'/*', 
+      name:'404',
+      component: () => import('@/view/ErrorModal.vue')
     }
 ]
 const router =createRouter({

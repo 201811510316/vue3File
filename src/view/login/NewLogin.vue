@@ -16,7 +16,7 @@
                 <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="submitForm">提交</el-button>
+                <el-button type="primary" class="button-css" style="width: 275px; height: 42px;" @click="submitForm">提交</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -46,7 +46,7 @@ function submitForm(){
 
 </script>
 
-<style>
+<style scoped>
 .login-body {
     display: flex;
     justify-content: center;
@@ -59,7 +59,7 @@ function submitForm(){
 }
 .login-container {
     width: 420px;
-    height: 500px;
+    height: 450px;
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0px 21px 41px 0px rgba(0, 0, 0, 0.2);
@@ -88,10 +88,14 @@ function submitForm(){
     width: 70%;
     margin: 0 auto;
 }
-.login-form >>> .el-form--label-top .el-form-item__label {
+.login-form :deep(.el-form--label-top .el-form-item__label) {
     padding: 0;
 }
-.login-form >>> .el-form-item {
-    margin-bottom: 0;
+.login-form :deep(.el-form-item) {
+    margin-bottom: 20px;
 }
+.button-css{
+    margin-top: 1rem;
+}
+
 </style>

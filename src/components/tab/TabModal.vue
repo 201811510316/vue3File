@@ -2,6 +2,7 @@
     <div class="tabs">
         <el-tag
             :key="tag.name"
+            class="el-tag-width"
             v-for="(tag, index) in tags"
             :closable="tag.name !== 'user-main'"
             :disable-transitions="false"
@@ -58,7 +59,10 @@ export default {
 .tabs{
     margin-top: 1rem;
     margin-bottom: 1rem;
-    margin-left: 1rem;
+    margin-left: 0.5rem;
     margin-right: 1rem;
+}
+.el-tag-width{
+  margin-left: 0.5rem;
 }
 </style>
