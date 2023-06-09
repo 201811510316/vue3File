@@ -13,7 +13,7 @@
       <el-container>
         <!-- 顶栏容器 -->
         <el-header><HeaderModal @emitDemo="mainFunction"/></el-header>
-        
+        <TabModal/>
         <!-- 主要区域容器 -->
         <el-main><router-view/></el-main>
       </el-container>
@@ -24,6 +24,7 @@
 import {ref} from 'vue';
 import AsideModal from '@/layout/aside/AsideModal.vue';
 import HeaderModal from '@/layout/header/HeaderModal.vue';
+import TabModal from '@/components/tab/TabModal.vue';
 
 const asideModalRef = ref();
 

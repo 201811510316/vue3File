@@ -15,7 +15,6 @@
     height: 100px;
 }
 .my-12 {
-  margin-top: 2rem;
   margin-bottom: 2rem;
 }
 .mx-4 {

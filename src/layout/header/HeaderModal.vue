@@ -3,8 +3,7 @@
         <el-menu
             class="el-menu-demo"
             mode="horizontal"
-            @select="handleSelect"
-            background-color="#545c64"
+            background-color="#000000"
             text-color="#fff"
             active-text-color="#ffd04b"
         >
@@ -39,9 +38,6 @@ const router = useRouter();
 const dialogFormRef = ref();
 
 
-function handleSelect(){
-
-}
 // 查看个人信息
 function userData() {
     console.log("个人信息")
@@ -62,12 +58,17 @@ function isCollapseFunction(){
 </script>
 
 <style scoped>
+.el-menu-demo{
+    width: 100%;
+}
 .el-menu-modal{
     display: flex;
 }
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 .my-1 {
   margin-top: 0.25rem;

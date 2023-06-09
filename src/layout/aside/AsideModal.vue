@@ -1,71 +1,108 @@
 <template>
     <el-menu 
-        default-active="/userMain" 
+        :default-active="$router.path" 
         class="el-menu-vertical-demo" 
-        @open="handleOpen" 
-        @close="handleClose" 
         :collapse="isCollapse"
         :router="true"
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b"
     >
-        <el-menu-item index="/userMain">
+        <el-menu-item :index="item.path" v-for="item in noChildren" :key="item.path" @click="clickMenu(item)">
             <el-icon><User/></el-icon>
-            <span>个人信息</span>
+            <span>{{item.label}}</span>
         </el-menu-item>
-        <el-sub-menu index="1">
-            <template v-slot:title>
-                <el-icon><Location/></el-icon>
-                <span>导航一</span>
-            </template>
-            <el-menu-item-group>
-                <el-menu-item index="/index">选项1</el-menu-item>
-                <el-menu-item index="/setting">选项2</el-menu-item>
-            </el-menu-item-group>
-        </el-sub-menu>
-        <el-sub-menu index="2">
+        <el-sub-menu :index="item.label" v-for="(item, index) in hasChildren" :key="index">
             <template v-slot:title>
                 <el-icon><Document/></el-icon>
-                <span>导航二</span>
+                <span>{{item.label}}</span>
             </template>
             <el-menu-item-group>
-                <el-menu-item index="/admin">选项1</el-menu-item>
-                <el-menu-item index="/lianxi-2">选项2</el-menu-item>
-            </el-menu-item-group>
-        </el-sub-menu>
-        <el-sub-menu index="3">
-            <template v-slot:title>
-                <el-icon><Setting/></el-icon>
-                <span>导航三</span>
-            </template>
-            <el-menu-item-group>
-                <el-menu-item index="/lianxi-3">选项1</el-menu-item>
+                <el-menu-item 
+                    :index="subItem.path" 
+                    v-for="(subItem, subIndex) in item.children" 
+                    :key="subIndex" 
+                    @click="clickMenu(subItem)"
+                >
+                    {{subItem.label}}
+                </el-menu-item>
             </el-menu-item-group>
         </el-sub-menu>
     </el-menu>
 </template>
 
 <script setup>
-import {ref} from 'vue';
+import {ref, reactive, computed} from 'vue';
 import {Location,Setting,Document,User} from '@element-plus/icons-vue';
+import store from '@/store';
+import {useRouter} from "vue-router";
 
+const router = useRouter();
 const isCollapse = ref(false);
+const menu = reactive([
+    {
+        path:'/userMain',
+        name:'user-main',
+        label:'个人信息',
+        url:'admin/UserMainModal'
+    },
+    {
+        label: '导航一',
+        children: [
+            {
+              path: '/index',
+              name: 'Index',
+              label: '选项1',
+              url: 'mine/lianxi-1/IndexModal'
+            },
+            {
+              path: '/setting',
+              name: 'Setting',
+              label: '选项2',
+              url: 'mine/lianxi-1/SettingModal'
+            }
+        ]
+    },
+    {
+        label: '导航二',
+        children: [
+            {
+              path:'/admin',
+              name:'admin',
+              label: '选项3',
+              url: 'admin/userDataModal'
+            },
+            {
+              path:'/lianxi-2',
+              name:'lianxi-2',
+              label: '选项4',
+              url: 'mine/lianxi-2/IndexModal'
+            }
+        ]
+    },
+    {
+        label: '导航三',
+        children: [
+            {
+                path:'/lianxi-3',
+                name:'lianxi-3',
+                label: '选项5',
+                url: 'mine/lianxi-3/indexModal'
+            },
+        ]
+    },
+])
 
-function handleOpen(item) {
-    console.log(item)
-}
-function handleClose(key, keyPath) {
-    console.log(key,keyPath)
-}
+const noChildren = computed(()=>{
+    return menu.filter(item => !item.children)
+})
+const hasChildren = computed(()=>{
+    return menu.filter(item => item.children)
+}) 
 
-function clickItem(item) {
-   // 防止自己跳自己的报错
-    if (this.$route.path !== item.path && !(this.$route.path === '/userMian' && (item.path === '/userMain'))) {
-        this.$router.push(item.path)
-    }
-    // 面包屑
-    this.$store.commit('SelectMenu',item)
+function clickMenu(item) {
+    store.commit('selectMenu', item)
+    router.push({name: item.name})
 }
 
 function isCollapseFun() {

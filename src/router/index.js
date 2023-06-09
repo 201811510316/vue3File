@@ -19,7 +19,7 @@ const routes = [
       {
           path:'/userMain',
           name:'user-main',
-          component:() => import('@/view/admin/UserMainModal.vue'),
+          component:() => import('@/view/admin/UserMainModal'),
           meta: {
             title: '个人信息',
           }
@@ -34,7 +34,7 @@ const routes = [
       {
           path:'/index', 
           name:'Index',
-          component:() => import('@/view/mine/lianxi-1/IndexModal.vue'),
+          component:() => import('@/view/mine/lianxi-1/IndexModal'),
           meta: {
             title: '选项1',
           }
@@ -42,7 +42,7 @@ const routes = [
       {
           path:'/setting',
           name:'Setting',
-          component:() => import('@/view/mine/lianxi-1/SettingModal.vue'),
+          component:() => import('@/view/mine/lianxi-1/SettingModal'),
           meta: {
             title: '选项2',
           }
@@ -57,7 +57,7 @@ const routes = [
       {
               path:'/admin',
               name:'admin',
-              component:() => import('@/view/admin/userDataModal.vue'),
+              component:() => import('@/view/admin/userDataModal'),
               meta: {
                 title: '选项3',
               }
@@ -65,7 +65,7 @@ const routes = [
           {
               path:'/lianxi-2',
               name:'lianxi-2',
-              component:() => import('@/view/mine/lianxi-2/IndexModal.vue'),
+              component:() => import('@/view/mine/lianxi-2/IndexModal'),
               meta: {
                 title: '选项4',
               }
@@ -80,7 +80,7 @@ const routes = [
       {
         path:'/lianxi-3',
         name:'lianxi-3',
-          component:() => import('@/view/mine/lianxi-3/indexModal.vue'),
+          component:() => import('@/view/mine/lianxi-3/indexModal'),
           meta: {
             title: '选项5',
           }
