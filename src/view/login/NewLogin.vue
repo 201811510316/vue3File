@@ -10,22 +10,25 @@
         </div>
         <el-form :model="ruleForm" :rules="rules" ref="loginForm" label-width="100px" class="login-form">
             <el-form-item label="用户名称" prop="name">
-                <el-input v-model="ruleForm.name" autocomplete="off"></el-input>
+                <el-input v-model="ruleForm.name" placeholder="请输入手机号" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="用户密码" prop="pass">
-                <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" class="button-css" style="width: 275px; height: 42px;" @click="submitForm">提交</el-button>
+                <el-input type="password" v-model="ruleForm.pass" placeholder="请输入密码" autocomplete="off"></el-input>
             </el-form-item>
         </el-form>
+        <el-button type="primary" class="button-css" @click="submitForm">提交</el-button>
     </div>
   </div>
 </template>
 
 <script setup>
+import { ApiClient } from '@/utils/ApiClient';
+import { storage } from '@/utils/storage';
 import {ref, reactive} from 'vue';
 import {useRouter} from "vue-router";
+import {ACCESS_TOKEN, REFRESH_ACCESS_TOKEN, CURRENT_USER} from '@/store/mutation-types';
+import empty from '@/utils/empty';
+import Modals from '@/utils/Modals'
 
 const router = useRouter();
 const loginForm = ref();
@@ -40,7 +43,25 @@ const rules = reactive({
 
 // 登录
 function submitForm(){
+    if (empty(ruleForm.name) || empty(ruleForm.pass)) {
+        Modals.error("请填写用户名和密码")
+        return;
+    }
+    const values = Object.assign({},{"mobile":ruleForm.name,"password":ruleForm.pass})
+    loginAdmin(values,function (result) {
+        console.log(result)
+        const ex = 7 * 24 * 60 * 60 * 1000;
+        storage.set(ACCESS_TOKEN, result.token, ex);
+        storage.set(REFRESH_ACCESS_TOKEN, result.refresh_token, ex);
+        storage.set(CURRENT_USER, result.loginUser, ex);
+    })
     router.replace('/userMain');
+}
+
+function loginAdmin(params,callback){
+    const client =  new ApiClient();
+    client.post("/adminAccount/login",params);
+    client.setSuccessCallback(callback);
 }
 
 
@@ -95,7 +116,10 @@ function submitForm(){
     margin-bottom: 20px;
 }
 .button-css{
+    width: 270px; 
+    height: 42px;
     margin-top: 1rem;
+    margin-left: 86px;
 }
 
 </style>

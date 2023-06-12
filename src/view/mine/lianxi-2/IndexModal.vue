@@ -3,7 +3,7 @@
         <div class="my-12 mx-4">
             <el-card class="box-card">
                 <div class="text item">
-                    {{'列表内容'}}
+                    {{bean}}
                 </div>
             </el-card>
         </div>
@@ -18,6 +18,19 @@
 </template>
 
 <script setup>
+import { ref, onMounted} from 'vue'
+import empty from '@/utils/empty';
+
+const bean = ref();
+
+onMounted(()=>{
+    if (empty(bean.value)){
+        bean.value = '列表内容';
+    } else {
+        bean.value = '内容不为空';
+    }
+})
+
 
 </script>
 
