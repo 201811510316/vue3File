@@ -49,8 +49,8 @@
             <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :background="background"
-                :total="props.pageTotal"
+                :background="true"
+                :total="total"
                 :current-page="currentPage"
                 :page-size="pageSize"
                 :page-count="pageCountSize"
@@ -60,25 +60,24 @@
     </div>
 </template>
 <script setup>
-import {ref, reactive} from 'vue';
+import {ref} from 'vue';
 import { ElPagination } from 'element-plus'
 
-const pageSize = ref(10);
-// const pageTotal = ref(12)
-const pageCountSize = ref(5);
-const currentPage = ref(1);
+const pageSize = ref(10); //每页几条数据
+const pageCountSize = ref(Math.ceil(props.total/pageSize.value)); //总页数
+const currentPage = ref(1);//当前页
 
 const props = defineProps({
     tableData: {// 表格显示的数据
-        type: String,
+        type: Array,
     },
     tableHeader: {// 表头数据
-        type: String,
+        type: Array,
         default: function () {
-        return [];
+            return [];
         },
     },
-    pageTotal: { // 总页数
+    total: { // 总页数
         type: Number,
     }
 })
@@ -89,7 +88,7 @@ const selectionChange = (val) => {
 
 function handleSizeChange(val) { // 页数改变的时候触发的事件
     pageSize.value = val;
-    // pageCountSize.value = Math.ceil(props.pageTotal/val);
+    pageCountSize.value = Math.ceil(props.total/val);
 }
 function handleCurrentChange(val) { // 当前页改变的时候触发的事件 
     currentPage.value = val

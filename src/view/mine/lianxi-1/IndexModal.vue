@@ -13,7 +13,7 @@
                     :tableData="tableData"
                     :tableHeader="tableHeader"
                     :isOperate="isOperate"
-                    :total="pageTotal"
+                    :total="total"
                     :operateWidth="operateWidth"
                 >
                     <template v-slot:state>
@@ -21,7 +21,7 @@
                     </template>
                     <template v-slot:action>
                         <el-button
-                            size="mini"
+                            size="default"
                             type="success"
                             @click="updateCommentReview(scope.row.id)">
                             操作按钮
@@ -39,6 +39,87 @@ import {ref, reactive} from 'vue';
 
 // 表格所需的数据
 const tableData = reactive([
+  {
+    avatar: "头像",
+    nickname: "评论人",
+    replyNickname: "回复人",
+    articleTitle: "文章标题",
+    commentContent: "评论内容",
+    createTime: "评论时间",
+    isReview: "状态",
+  },
+  {
+    avatar: "头像",
+    nickname: "评论人",
+    replyNickname: "回复人",
+    articleTitle: "文章标题",
+    commentContent: "评论内容",
+    createTime: "评论时间",
+    isReview: "状态",
+  },
+  {
+    avatar: "头像",
+    nickname: "评论人",
+    replyNickname: "回复人",
+    articleTitle: "文章标题",
+    commentContent: "评论内容",
+    createTime: "评论时间",
+    isReview: "状态",
+  },
+  {
+    avatar: "头像",
+    nickname: "评论人",
+    replyNickname: "回复人",
+    articleTitle: "文章标题",
+    commentContent: "评论内容",
+    createTime: "评论时间",
+    isReview: "状态",
+  },
+  {
+    avatar: "头像",
+    nickname: "评论人",
+    replyNickname: "回复人",
+    articleTitle: "文章标题",
+    commentContent: "评论内容",
+    createTime: "评论时间",
+    isReview: "状态",
+  },
+  {
+    avatar: "头像",
+    nickname: "评论人",
+    replyNickname: "回复人",
+    articleTitle: "文章标题",
+    commentContent: "评论内容",
+    createTime: "评论时间",
+    isReview: "状态",
+  },
+  {
+    avatar: "头像",
+    nickname: "评论人",
+    replyNickname: "回复人",
+    articleTitle: "文章标题",
+    commentContent: "评论内容",
+    createTime: "评论时间",
+    isReview: "状态",
+  },
+  {
+    avatar: "头像",
+    nickname: "评论人",
+    replyNickname: "回复人",
+    articleTitle: "文章标题",
+    commentContent: "评论内容",
+    createTime: "评论时间",
+    isReview: "状态",
+  },
+  {
+    avatar: "头像",
+    nickname: "评论人",
+    replyNickname: "回复人",
+    articleTitle: "文章标题",
+    commentContent: "评论内容",
+    createTime: "评论时间",
+    isReview: "状态",
+  },
   {
     avatar: "头像",
     nickname: "评论人",
@@ -111,7 +192,7 @@ const tableHeader = reactive([
  
 const operateWidth = ref(160); // 操作列宽度
 const isOperate = ref(true); // 操作列是否显示
-const pageTotal = ref(12);  //数据总数
+const total = ref(100);  //数据总数
 
 </script>
 
