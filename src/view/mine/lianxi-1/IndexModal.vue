@@ -3,7 +3,11 @@
         <div class="my-12 mx-4">
             <el-card class="box-card">
                 <div class="text item">
-                    {{'列表内容1'}}
+                    <FormModal
+                      ref="formModalRef"
+                      :rules="state.rules"
+                      :formList="state.formList"
+                    />
                 </div>
             </el-card>
         </div>
@@ -35,6 +39,7 @@
 
 <script setup>
 import TableModal from '@/components/mine/table/TableModal.vue';
+import FormModal from '@/components/mine/form/FormModal.vue';
 import {ref, reactive} from 'vue';
 
 // 表格所需的数据
@@ -194,9 +199,28 @@ const operateWidth = ref(160); // 操作列宽度
 const isOperate = ref(true); // 操作列是否显示
 const total = ref(100);  //数据总数
 
+const formModalRef = ref()
+const state = reactive({
+  formList:[
+    {
+      label:'姓名',
+      key:'name',
+      type:'input'
+    },
+    {
+      label:'手机号',
+      key:'mobile',
+      type:'input'
+    }
+  ],
+  rules:{
+    name: [{required: true, message: '请输入', trigger: 'blur'}],
+    mobile: [{required: true, message: '请输入', trigger: 'blur'}]
+  }
+})
 </script>
 
-<style>
+<style scoped>
 .text {
     font-size: 14px;
   }

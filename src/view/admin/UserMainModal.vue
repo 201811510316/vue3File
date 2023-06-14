@@ -17,6 +17,13 @@
 </template>
 
 <script setup>
+import {onMounted} from 'vue';
+import {storage} from '@/utils/storage';
+import { ACCESS_TOKEN } from '@/store/mutation-types';
+
+onMounted(()=>{
+    console.log(storage.get(ACCESS_TOKEN))
+})
 
 </script>
 

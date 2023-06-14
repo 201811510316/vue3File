@@ -5,6 +5,10 @@ const Components = require('unplugin-vue-components/webpack')
 const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 
 module.exports = defineConfig({
+  assetsDir:'static',
+  parallel:false,
+  publicPath:'./',
+  outputDir:'dist',
   transpileDependencies: true,
   configureWebpack: {
     plugins: [
