@@ -1,49 +1,25 @@
 <template>
     <div>
-        <div>
-            <el-table 
-                :data="tableData" 
-                :border="true" 
-                style="width: 100%" 
-                @selection-change="selectionChange"
+        <el-table 
+            :data="tableData" 
+            :border="true" 
+            style="width: 100%" 
+            @selection-change="selectionChange"
+        >
+            <el-table-column type="selection" width="50"/>
+            <el-table-column
+                v-for="item in tableHeader"
+                :key="item.prop"
+                v-bind="item"
             >
-                <el-table-column type="selection" width="50"/>
-                <template v-for="(item,index) in tableHeader">
-                    <el-table-column
-                        v-if="item.slot"
-                        :key="index"
-                        :prop="item.prop"
-                        :label="item.label"
-                        :fixed="item.fixed"
-                        :align="item.align || 'center'"
-                        :show-overflow-tooltip="item.overHidden || false"
-                        :min-width="item.minWidth || '100px'"
-                        :sortable="item.sortable || false"
-                        :type="item.type"
-                    >
-                        <slot :name="item.slot"></slot>
-                    </el-table-column>
-
-                    <el-table-column
-                        v-else
-                        :key="index + 1"
-                        :prop="item.prop"
-                        :label="item.label"
-                        :fixed="item.fixed"
-                        :align="item.align || 'center'"
-                        :show-overflow-tooltip="item.overHidden || false"
-                        :min-width="item.minWidth || '100px'"
-                        :sortable="item.sortable || false"
-                        :type="item.type"
-                        :width="item.width"
-                    >
-                        <template #default="scope">
-                            <span>{{ scope.row[item.prop] ? scope.row[item.prop] : "" }}</span>
-                        </template>
-                    </el-table-column>
+                <template #default="scope" v-if="$slots[item.prop]">
+                    <slot :name="item.prop" v-bind="scope"></slot>
                 </template>
-            </el-table>
-        </div>
+                <template #add="scope" v-if="$slots[item.prop]">
+                    <slot :name="item.prop" v-bind="scope"></slot>
+                </template>
+            </el-table-column>
+        </el-table>
         
         <div class="block">
             <el-pagination

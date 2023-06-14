@@ -1,7 +1,6 @@
 <template>
     <el-menu 
         :default-active="$router.path" 
-        class="el-menu-vertical-demo" 
         :collapse="isCollapse"
         :router="true"
         background-color="#545c64"
@@ -124,12 +123,6 @@ defineExpose({
 </script>
 
 <style scoped>
-.el-menu-vertical-demo:not(.el-menu--collapse){
-    width: 200px;
-}
-.el-sub-menu{
-    width: 200px;
-}
 .el-menu{
     border-right: solid 0px;
 }

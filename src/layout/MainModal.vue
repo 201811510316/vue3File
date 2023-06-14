@@ -1,11 +1,11 @@
 <template>
     <el-container>
       <!-- 侧边栏容器 -->
-      <el-aside width="200px">
+      <el-aside :width="mainWidth">
         <div class="head">
             <div>
               <img src="@/assets/logo.png" alt="logo">
-              <span>vue3 admin</span>
+              <span v-if="mainWidth === '200px'">vue3 admin</span>
             </div>
         </div>
         <AsideModal ref="asideModalRef"/>
@@ -27,9 +27,17 @@ import HeaderModal from '@/layout/header/HeaderModal.vue';
 import TabModal from '@/components/tab/TabModal.vue';
 
 const asideModalRef = ref();
-
+const mainWidth = ref("200px")
 function mainFunction() {
   asideModalRef.value.isCollapseFun();
+  if (mainWidth.value == "75px") {
+      mainWidth.value = "200px"
+      return;
+  }
+  if (mainWidth.value == "200px") {
+      mainWidth.value = "75px"
+      return;
+  }
 }
 
 </script>

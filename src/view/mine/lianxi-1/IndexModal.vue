@@ -13,24 +13,22 @@
         </div>
         <div class="mx-4">
             <el-card class="box-card-2">
+                <div class="mb-4">
+                  <el-button type="primary">添加</el-button>
+                </div>
                 <TableModal
                     :tableData="tableData"
                     :tableHeader="tableHeader"
-                    :isOperate="isOperate"
                     :total="total"
-                    :operateWidth="operateWidth"
                 >
-                    <template v-slot:state>
-                        <el-tag>文章</el-tag>
-                    </template>
-                    <template v-slot:action>
-                        <el-button
-                            size="default"
-                            type="success"
-                            @click="updateCommentReview(scope.row.id)">
-                            操作按钮
-                        </el-button>
-                    </template>
+                  <template #operation="scope">
+                      <el-button 
+                          size="default" 
+                          @click="handleEdit(scope.$index, scope.row)"
+                      >
+                        编辑
+                      </el-button>
+                  </template>
                 </TableModal>
             </el-card>
         </div>
@@ -139,66 +137,39 @@ const tableData = reactive([
 const tableHeader = reactive([
   {
     prop: "avatar",
-    fixed: "left",
     label: "头像",
-    width: "130px",
-    align: "center",
   },
   {
     prop: "nickname",
     label: "评论人",
-    width: "130px",
-    align: "center", 
   },
   {
     prop: "replyNickname",
     label: "回复人",
-    width: "130px",
-    align: "left",
   },
   {
     prop: "articleTitle",
     label: "文章标题",
-    width: "130px",
-    align: "left",
   },
   {
     prop: "commentContent",
     label: "评论内容",
-    width: "130px",
-    align: "left",
   },
   {
     prop: "createTime",
     label: "评论时间",
-    width: "130px",
-    align: "left",
   },
   {
     prop: "isReview", 
     label: "状态",
-    width: "130px", 
-    align: "left",
   },
   {
-    label: "来源",
-    slot: "state", //插槽根据需求显示
-    width: "130px",
-    align: "left",
-  },
-  {
+    prop: 'operation',
     label: "操作",
-    slot: "action",
-    fixed: "right",
-    width: "130px",
-    align: "center",
   },
 ]);
- 
-const operateWidth = ref(160); // 操作列宽度
-const isOperate = ref(true); // 操作列是否显示
-const total = ref(100);  //数据总数
 
+const total = ref(100);  //数据总数
 const formModalRef = ref()
 const state = reactive({
   formList:[
@@ -218,6 +189,13 @@ const state = reactive({
     mobile: [{required: true, message: '请输入', trigger: 'blur'}]
   }
 })
+
+const handleEdit = (index, row) => {
+  console.log(index, row)
+}
+
+
+
 </script>
 
 <style scoped>
@@ -243,5 +221,8 @@ const state = reactive({
 .mx-4 {
   margin-left: 1rem;
   margin-right: 1rem;
+}
+.mb-4 {
+  margin-bottom: 1rem;
 }
 </style>
