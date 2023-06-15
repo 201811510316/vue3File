@@ -8,12 +8,16 @@
         active-text-color="#ffd04b"
     >
         <el-menu-item :index="item.path" v-for="item in noChildren" :key="item.path" @click="clickMenu(item)">
-            <el-icon><User/></el-icon>
+            <el-icon>
+                <component :is="item.icon" />
+            </el-icon>
             <span>{{item.label}}</span>
         </el-menu-item>
         <el-sub-menu :index="item.label" v-for="(item, index) in hasChildren" :key="index">
             <template v-slot:title>
-                <el-icon><Document/></el-icon>
+                <el-icon>
+                    <component :is="item.icon" />
+                </el-icon>
                 <span>{{item.label}}</span>
             </template>
             <el-menu-item-group>
@@ -30,7 +34,9 @@
             <div v-for="(subItem, subIndex) in item.children" :key="subIndex">
                 <el-sub-menu v-if="subItem.children" :index="subItem.label">
                     <template v-slot:title>
-                        <el-icon><Setting/></el-icon>
+                        <el-icon>
+                            <component :is="subItem.icon" />
+                        </el-icon>
                         <span>{{subItem.label}}</span>
                     </template>
                     <el-menu-item 
@@ -52,6 +58,7 @@ import {ref, computed} from 'vue';
 import store from '@/store';
 import {useRouter} from "vue-router";
 import menu from './menu';
+
 
 const router = useRouter();
 const isCollapse = ref(false);

@@ -4,9 +4,10 @@ const menu = [
         name:'user-main',
         label:'个人信息',
         url:'admin/UserMainModal',
-        icon: 'user',
+        icon: 'HomeFilled',
     },
     {
+        icon:'Document',
         label: '导航一',
         children: [
             {
@@ -26,6 +27,7 @@ const menu = [
         ]
     },
     {
+        icon:'Setting',
         label: '导航二',
         children: [
             {
@@ -45,6 +47,7 @@ const menu = [
         ]
     },
     {
+        icon:'Histogram',
         label: '导航三',
         children: [
             {
@@ -57,6 +60,7 @@ const menu = [
         ]
     },
     {
+        icon:'Discount',
         label: '导航五',
         children: [
             {
@@ -67,6 +71,7 @@ const menu = [
                 fatcher:'导航五'
             },
             {
+                icon:'Menu',
                 fatcher:'导航五',
                 label: '二级导航',
                 children: [

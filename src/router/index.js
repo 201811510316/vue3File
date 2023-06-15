@@ -1,5 +1,9 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Layout from '@/layout/MainModal.vue';
+import { storage } from '@/utils/storage';
+import { ACCESS_TOKEN } from '@/store/mutation-types';
+import empty from '@/utils/empty';
+import Modals from '@/utils/Modals';
 
 const routes = [
   {
@@ -138,5 +142,18 @@ const router =createRouter({
 	routes
 })
 
+const whiteList = ['/login']
+router.beforeEach((to, from, next)=>{
+    const token = storage.get(ACCESS_TOKEN);
+    if (token) {
+        next()
+    } else {
+        if (whiteList.includes(to.path)) {
+            next()
+        } else {
+            next('/login')
+        }
+    }
+})
 
 export default router;

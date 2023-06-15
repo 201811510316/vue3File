@@ -45,6 +45,9 @@ const rules = reactive({
 async function submitForm(){
     const flag = await Modals.confirm("asdsd")
     if (flag) {
+        const token = "sd"
+        const ex = 7 * 24 * 60 * 60 * 1000;
+        storage.set(ACCESS_TOKEN, token, ex);
         router.replace('/userMain');
         return;
     }
