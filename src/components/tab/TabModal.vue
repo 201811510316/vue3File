@@ -10,7 +10,7 @@
             @click="changeMenu(tag)"
             :effect="$route.name === tag.name ? 'dark' : 'plain'"
         >
-            {{ tag.label }}
+            <el-button link>{{ tag.label }}</el-button>
         </el-tag>
     </div>
 </template>
@@ -64,5 +64,9 @@ export default {
 }
 .el-tag-width{
   margin-left: 0.5rem;
+}
+.el-button{
+  --el-button-text-color: #0a0a0a;
+  --el-button-hover-link-text-color: #121212;
 }
 </style>

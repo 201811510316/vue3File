@@ -39,6 +39,7 @@
 import TableModal from '@/components/mine/table/TableModal.vue';
 import FormModal from '@/components/mine/form/FormModal.vue';
 import {ref, reactive} from 'vue';
+import tableHeader from './commonJs/column1';
 
 // 表格所需的数据
 const tableData = reactive([
@@ -131,41 +132,6 @@ const tableData = reactive([
     commentContent: "评论内容",
     createTime: "评论时间",
     isReview: "状态",
-  },
-]);
-//表头数据  辅助tableData的数据 tableData是自己定义
-const tableHeader = reactive([
-  {
-    prop: "avatar",
-    label: "头像",
-  },
-  {
-    prop: "nickname",
-    label: "评论人",
-  },
-  {
-    prop: "replyNickname",
-    label: "回复人",
-  },
-  {
-    prop: "articleTitle",
-    label: "文章标题",
-  },
-  {
-    prop: "commentContent",
-    label: "评论内容",
-  },
-  {
-    prop: "createTime",
-    label: "评论时间",
-  },
-  {
-    prop: "isReview", 
-    label: "状态",
-  },
-  {
-    prop: 'operation',
-    label: "操作",
   },
 ]);
 

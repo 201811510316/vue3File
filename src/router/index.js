@@ -88,6 +88,46 @@ const routes = [
       ]
     },
     {
+      path:'/mine',
+      name:'mine',
+      component: Layout,
+      children:[
+        {
+          path:'/lianxi-5',
+          name:'lianxi-5',
+          component:() => import('@/view/mine/lianxi-5/lianxiModal5'),
+          meta: {
+            title: '选项六',
+          }
+        },
+        {
+          path:'/lianxi-6',
+          name:'lianxi-6',
+          meta: {
+            title: '二级导航',
+          },
+          children:[
+            {
+              path:'/lianxi-7',
+              name:'lianxi-7',
+              component:() => import('@/view/mine/lianxi-5/lianxiModal7'),
+              meta: {
+                title: '选项七',
+              }
+            },
+            {
+              path:'/lianxi-8',
+              name:'lianxi-8',
+              component:() => import('@/view/mine/lianxi-5/lianxiModal8'),
+              meta: {
+                title: '选项八',
+              }
+            },
+          ]
+        },
+      ]
+    },
+    {
       path:'/*', 
       name:'404',
       component: () => import('@/view/ErrorModal.vue')

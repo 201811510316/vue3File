@@ -12,11 +12,11 @@
                     <Fold/>
                 </el-icon>
             </el-button>
-
             <BreadcrumbModal/>
+            <div class="flex-grow"/>
             <el-menu-item index="1"><div class="my-1">处理中心</div></el-menu-item>
             <el-sub-menu index="2">
-                <template v-slot:title>我的工作台</template>
+                <template v-slot:title>工作台</template>
                 <el-menu-item index="2-2"><div @click="rePass">重置密码</div></el-menu-item>
                 <el-menu-item index="2-3"><div @click="logout">退出登录</div></el-menu-item>
             </el-sub-menu>
@@ -67,5 +67,8 @@ function isCollapseFunction(){
 .my-1 {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
+}
+.flex-grow {
+  flex-grow: 1;
 }
 </style>

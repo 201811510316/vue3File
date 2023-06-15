@@ -1,6 +1,6 @@
 <template>
-    <el-menu 
-        :default-active="$router.path" 
+    <el-menu
+        :default-active="$router.path"
         :collapse="isCollapse"
         :router="true"
         background-color="#545c64"
@@ -17,105 +17,62 @@
                 <span>{{item.label}}</span>
             </template>
             <el-menu-item-group>
-                <el-menu-item 
-                    :index="subItem.path" 
-                    v-for="(subItem, subIndex) in item.children" 
-                    :key="subIndex" 
-                    @click="clickMenu(subItem)"
-                >
-                    {{subItem.label}}
-                </el-menu-item>
+                <div v-for="(subItem, subIndex) in item.children" :key="subIndex">
+                    <el-menu-item
+                        :index="subItem.path" 
+                        v-if="subItem.name"
+                        @click="clickMenu(subItem)"
+                    >
+                        {{subItem.label}}
+                    </el-menu-item>
+                </div>
             </el-menu-item-group>
+            <div v-for="(subItem, subIndex) in item.children" :key="subIndex">
+                <el-sub-menu v-if="subItem.children" :index="subItem.label">
+                    <template v-slot:title>
+                        <el-icon><Setting/></el-icon>
+                        <span>{{subItem.label}}</span>
+                    </template>
+                    <el-menu-item 
+                        :index="subItem2.path" 
+                        v-for="(subItem2, subIndex2) in subItem.children" 
+                        :key="subIndex2" 
+                        @click="clickMenu(subItem2)"
+                    >
+                        {{subItem2.label}}
+                    </el-menu-item>
+                </el-sub-menu>
+            </div>
         </el-sub-menu>
     </el-menu>
 </template>
 
 <script setup>
-import {ref, reactive, computed} from 'vue';
+import {ref, computed} from 'vue';
 import store from '@/store';
 import {useRouter} from "vue-router";
+import menu from './menu';
 
 const router = useRouter();
 const isCollapse = ref(false);
-const menu = reactive([
-    {
-        path:'/userMain',
-        name:'user-main',
-        label:'个人信息',
-        url:'admin/UserMainModal',
-        icon: 'user',
-    },
-    {
-        label: '导航一',
-        icon: 'setting',
-        children: [
-            {
-              path: '/index',
-              name: 'Index',
-              label: '选项1',
-              url: 'mine/lianxi-1/IndexModal',
-              fatcher:'导航一'
-            },
-            {
-              path: '/setting',
-              name: 'Setting',
-              label: '选项2',
-              url: 'mine/lianxi-1/SettingModal',
-              fatcher:'导航一'
-            }
-        ]
-    },
-    {
-        label: '导航二',
-        icon: 'document',
-        children: [
-            {
-              path:'/admin',
-              name:'admin',
-              label: '选项3',
-              url: 'admin/userDataModal',
-              fatcher:'导航二'
-            },
-            {
-              path:'/lianxi-2',
-              name:'lianxi-2',
-              label: '选项4',
-              url: 'mine/lianxi-2/IndexModal',
-              fatcher:'导航二'
-            }
-        ]
-    },
-    {
-        label: '导航三',
-        icon: 'data',
-        children: [
-            {
-                path:'/lianxi-3',
-                name:'lianxi-3',
-                label: '选项5',
-                url: 'mine/lianxi-3/indexModal',
-                fatcher:'导航三'
-            },
-        ]
-    },
-])
 
+// 获取一级菜单
 const noChildren = computed(()=>{
     return menu.filter(item => !item.children)
 })
+// 获取二级三级菜单
 const hasChildren = computed(()=>{
     return menu.filter(item => item.children)
 }) 
-
+// 存储和展示所点击的菜单栏信息
 function clickMenu(item) {
     store.commit('selectMenu', item)
     router.push({name: item.name})
 }
-
+// 展开和折叠菜单栏
 function isCollapseFun() {
     isCollapse.value = !isCollapse.value;
 }
-
 
 defineExpose({
     isCollapseFun,
