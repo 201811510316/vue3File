@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-dialog title="重置密码" v-model="dialogFormVisible">
+        <el-dialog title="重置密码" :draggable="true" v-model="dialogFormVisible">
             <el-form :model="form" ref="formData" :rules="rules">
                 <el-form-item label="旧密码" prop="oldPassWord" :label-width="formLabelWidth">
                     <el-input v-model="form.oldPassWord" autocomplete="off"></el-input>
@@ -14,7 +14,7 @@
             </el-form>
             <div class="dialog-footer">
                 <el-button @click="cancel">取 消</el-button>
-                <el-button type="primary" @click="affirm">确 定</el-button>
+                <el-button type="primary" class="mr-4" @click="affirm">确 定</el-button>
             </div>
         </el-dialog>
     </div>
@@ -55,6 +55,9 @@ defineExpose({
 })
 </script>
 
-<style>
-
+<style scoped>
+.dialog-footer{
+    display: flex;
+    flex-direction:row-reverse;
+}
 </style>

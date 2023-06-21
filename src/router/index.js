@@ -46,7 +46,7 @@ const routes = [
       {
           path:'/setting',
           name:'Setting',
-          component:() => import('@/view/mine/lianxi-1/SettingModal'),
+          component:() => import('@/view/mine/lianxi-4/SettingModal'),
           meta: {
             title: '选项2',
           }
@@ -114,7 +114,7 @@ const routes = [
             {
               path:'/lianxi-7',
               name:'lianxi-7',
-              component:() => import('@/view/mine/lianxi-5/lianxiModal7'),
+              component:() => import('@/view/mine/lianxi-6/lianxiModal7'),
               meta: {
                 title: '选项七',
               }
@@ -122,7 +122,7 @@ const routes = [
             {
               path:'/lianxi-8',
               name:'lianxi-8',
-              component:() => import('@/view/mine/lianxi-5/lianxiModal8'),
+              component:() => import('@/view/mine/lianxi-7/lianxiModal8'),
               meta: {
                 title: '选项八',
               }

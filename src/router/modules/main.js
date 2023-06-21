@@ -13,7 +13,7 @@ export default {
         {
             path:'/main/setting', // 设置页面的路由
             name:'Setting',
-            component:() => import('@/view/mine/lianxi-1/SettingModal.vue')
+            component:() => import('@/view/mine/lianxi-4/SettingModal.vue')
         }
 	]
 }

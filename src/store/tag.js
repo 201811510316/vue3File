@@ -11,7 +11,7 @@ export default {
             }
         ]
     },
-    //里面定义方法，操作state方发
+    //里面定义方法，操作state方法
     mutations: {
         // 更新面包屑的数据
         selectMenu(state, item) {

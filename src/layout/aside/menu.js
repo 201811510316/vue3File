@@ -21,7 +21,7 @@ const menu = [
               path: '/setting',
               name: 'Setting',
               label: '选项2',
-              url: 'mine/lianxi-1/SettingModal',
+              url: 'mine/lianxi-4/SettingModal',
               fatcher:'导航一'
             }
         ]
@@ -79,7 +79,7 @@ const menu = [
                         path:'/lianxi-7',
                         name:'lianxi-7',
                         label: '选项7',
-                        url: 'mine/lianxi-5/lianxiModal7',
+                        url: 'mine/lianxi-6/lianxiModal7',
                         fatcher2:'二级导航',
                         fatcher:'导航五',
                     },
@@ -87,7 +87,7 @@ const menu = [
                         path:'/lianxi-8',
                         name:'lianxi-8',
                         label: '选项8',
-                        url: 'mine/lianxi-5/lianxiModal8',
+                        url: 'mine/lianxi-7/lianxiModal8',
                         fatcher2:'二级导航',
                         fatcher:'导航五',
                     },
