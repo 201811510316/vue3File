@@ -1,35 +1,32 @@
 const tableHeader = [
-    {
-      prop: "avatar",
-      label: "头像",
-    },
-    {
-      prop: "nickname",
-      label: "评论人",
-    },
-    {
-      prop: "replyNickname",
-      label: "回复人",
-    },
-    {
-      prop: "articleTitle",
-      label: "文章标题",
-    },
-    {
-      prop: "commentContent",
-      label: "评论内容",
-    },
-    {
-      prop: "createTime",
-      label: "评论时间",
-    },
-    {
-      prop: "isReview", 
-      label: "状态",
-    },
-    {
-      prop: 'operation',
-      label: "操作",
-    },
+  {
+    prop:'service',
+    label:'名称',
+  },
+  {
+    prop:'mobile',
+    label:'手机号',
+    
+  },
+  {
+    prop:'address',
+    label:'地址',
+    
+  },
+  {
+    prop:'company',
+    label:'公司',
+    
+  },
+  {
+    prop:'job',
+    label:'岗位',
+    
+  },
+  {
+    prop:'operation',
+    label:'操作',
+    
+  },
 ]
 export default tableHeader;

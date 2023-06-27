@@ -8,13 +8,13 @@
     />
 </template>
 <script setup>
-import { ref } from 'vue'
+import { ref, provide} from 'vue'
 import PopFormModal from '@/components/mine/form/PopFormModal.vue';
 import state from './common/stateData';
 import empty from '@/utils/empty';
 
 const popFormModalRef = ref();
-
+provide('title', '添加列表数据')
 // 提交表单数据
 function submitData(){
     const values = popFormModalRef.value.getData();
