@@ -40,7 +40,7 @@
             :type="column.type || ''"
             :sortable="column.sortable || false"
             :fixed="column.prop == 'operation' ? 'right' : column.fixed || false"
-            :align="column.prop == 'operation' ? 'left' : column.align || 'center'"
+            :align="column.prop == 'operation' ? 'center' : column.align || 'center'"
         >
             <!-- table自带的作用域插槽 -->
             <template #default="scope">

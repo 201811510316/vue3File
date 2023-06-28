@@ -11,7 +11,7 @@ const Modals = {
             }).then(() => {
                 resolve(true);
             }).catch(() => {
-                reject(new Error("false"));         
+                resolve(false);
             });
         });
     },

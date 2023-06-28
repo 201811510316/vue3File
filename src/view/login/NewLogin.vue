@@ -50,13 +50,13 @@ async function submitForm(){
         storage.set(ACCESS_TOKEN, token, ex);
         router.replace('/userMain');
         return;
-    }
+    } 
 
-    if (empty(ruleForm.name) || empty(ruleForm.pass)) {
-        Modals.error("请填写用户名和密码")
-        return;
-    }
-    const values = Object.assign({},{"mobile":ruleForm.name,"password":ruleForm.pass})
+    // if (empty(ruleForm.name) || empty(ruleForm.pass)) {
+    //     Modals.error("请填写用户名和密码")
+    //     return;
+    // }
+    // const values = Object.assign({},{"mobile":ruleForm.name,"password":ruleForm.pass})
     // loginAdmin(values,function (result) {
     //     console.log(result)
     //     const ex = 7 * 24 * 60 * 60 * 1000;
