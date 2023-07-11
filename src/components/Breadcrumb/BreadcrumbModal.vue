@@ -2,10 +2,13 @@
     <div>
       <el-breadcrumb class="breadcrumb" separator="/">
             <el-breadcrumb-item :to="{path:'/userMain'}">
-                个人信息
+                首页
             </el-breadcrumb-item>
             <el-breadcrumb-item :to="current.path" v-if="current">
                 {{ current.fatcher }}
+            </el-breadcrumb-item>
+            <el-breadcrumb-item :to="current.path" v-if=" current">
+                {{ current.fatcher2 }}
             </el-breadcrumb-item>
             <el-breadcrumb-item :to="current.path" v-if="current">
                 {{ current.label }}
