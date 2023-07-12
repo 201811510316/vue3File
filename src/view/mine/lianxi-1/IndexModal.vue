@@ -63,100 +63,109 @@
 <script setup>
 import TableModal from '@/components/mine/table/TableModal.vue';
 import FormModal from '@/components/mine/form/FormModal.vue';
-import {ref, reactive} from 'vue';
+import {ref, reactive, onMounted} from 'vue';
 import tableHeader from './common/column';
 import IndexAddModal from "./IndexAddModal.vue"
 import IndexDetailsModal from './IndexDetailsModal.vue';
 import formDataState from "./common/formDataState";
+import { ApiClient } from '@/utils/ApiClient';
 
 // 表格所需的数据
-const tableData = reactive([
-        {
-          serviceId:'001',
-          service:'苏无名',
-          mobile:'135111111111',
-          address:'aaa',
-          company:'xxx',
-          job:'xxx-1'
-        },
-        {
-          serviceId:'002',
-          service:'卢凌风',
-          mobile:'135222222222',
-          address:'bbb',
-          company:'xxx',
-          job:'xxx-2'
-        },
-        {
-          serviceId:'003',
-          service:'裴喜君',
-          mobile:'135111111111',
-          address:'ccc',
-          company:'xxx',
-          job:'xxx-3'
-        },
-        {
-          serviceId:'004',
-          service:'的法国红酒看来',
-          mobile:'135111111111',
-          address:'ddd',
-          company:'xxx',
-          job:'xxx-1'
-        },
-        {
-          serviceId:'005',
-          service:'薛环',
-          mobile:'135111111111',
-          address:'aaa',
-          company:'xxx',
-          job:'xxx-1'
-        },
-        {
-          serviceId:'006',
-          service:'裴坚',
-          mobile:'135111111111',
-          address:'aaa',
-          company:'xxx',
-          job:'xxx-1'
-        },
-        {
-          serviceId:'007',
-          service:'证先从',
-          mobile:'135111111111',
-          address:'aaa',
-          company:'xxx',
-          job:'xxx-1'
-        },
-        {
-          serviceId:'008',
-          service:'选项',
-          mobile:'135111111111',
-          address:'aaa',
-          company:'xxx',
-          job:'xxx-1'
-        },
-        {
-          serviceId:'009',
-          service:'企微端',
-          mobile:'135111111111',
-          address:'aaa',
-          company:'xxx',
-          job:'xxx-1'
-        },
-        {
-          serviceId:'010',
-          service:'三重门',
-          mobile:'135111111111',
-          address:'aaa',
-          company:'xxx',
-          job:'xxx-1'
-        },
-]);
+// const tableData = reactive([
+//         {
+//           serviceId:'001',
+//           service:'苏无名',
+//           mobile:'135111111111',
+//           address:'aaa',
+//           company:'xxx',
+//           job:'xxx-1'
+//         },
+//         {
+//           serviceId:'002',
+//           service:'卢凌风',
+//           mobile:'135222222222',
+//           address:'bbb',
+//           company:'xxx',
+//           job:'xxx-2'
+//         },
+//         {
+//           serviceId:'003',
+//           service:'裴喜君',
+//           mobile:'135111111111',
+//           address:'ccc',
+//           company:'xxx',
+//           job:'xxx-3'
+//         },
+//         {
+//           serviceId:'004',
+//           service:'的法国红酒看来',
+//           mobile:'135111111111',
+//           address:'ddd',
+//           company:'xxx',
+//           job:'xxx-1'
+//         },
+//         {
+//           serviceId:'005',
+//           service:'薛环',
+//           mobile:'135111111111',
+//           address:'aaa',
+//           company:'xxx',
+//           job:'xxx-1'
+//         },
+//         {
+//           serviceId:'006',
+//           service:'裴坚',
+//           mobile:'135111111111',
+//           address:'aaa',
+//           company:'xxx',
+//           job:'xxx-1'
+//         },
+//         {
+//           serviceId:'007',
+//           service:'证先从',
+//           mobile:'135111111111',
+//           address:'aaa',
+//           company:'xxx',
+//           job:'xxx-1'
+//         },
+//         {
+//           serviceId:'008',
+//           service:'选项',
+//           mobile:'135111111111',
+//           address:'aaa',
+//           company:'xxx',
+//           job:'xxx-1'
+//         },
+//         {
+//           serviceId:'009',
+//           service:'企微端',
+//           mobile:'135111111111',
+//           address:'aaa',
+//           company:'xxx',
+//           job:'xxx-1'
+//         },
+//         {
+//           serviceId:'010',
+//           service:'三重门',
+//           mobile:'135111111111',
+//           address:'aaa',
+//           company:'xxx',
+//           job:'xxx-1'
+//         },
+// ]);
+// const pagina = reactive({
+//       pageNo: 1,
+//       pageSize: 10,
+//       total: 15,
+// })
+
+const tableData = ref([]);
 const pagina = reactive({
-      pageNo: 1,
-      pageSize: 10,
-      total: 15,
+    pageNo:1,
+    pageSize:0,
+    total:0
 })
+
 const formModalRef = ref()
 const indexAddModalRef = ref()
 const indexDetailsModalRef = ref();
@@ -193,6 +202,27 @@ function getDetele(index){
 function addForm() {
     indexAddModalRef.value.addShow();
 }
+
+const page = ref({
+    pageNo: 1,
+    pageSize: 10,
+})
+function gird(params){
+    return new Promise((resolve)=>{
+      const client = new ApiClient();
+      client.post('/factory/page', params);
+      client.setSuccessCallback(function(response){
+         resolve(response);
+      })
+    })
+}
+
+onMounted( async ()=>{
+    const bean = await gird({...page.value});
+    tableData.value = bean.data;
+    pagina.total = bean.totalSize;
+    pagina.pageSize = bean.pageSize;
+})
 
 </script>
 

@@ -43,28 +43,28 @@ const rules = reactive({
 
 // 登录
 async function submitForm(){
-    const flag = await Modals.confirm("asdsd")
-    if (flag) {
-        const token = "sd"
-        const ex = 7 * 24 * 60 * 60 * 1000;
-        storage.set(ACCESS_TOKEN, token, ex);
-        router.replace('/userMain');
-        return;
-    } 
-
-    // if (empty(ruleForm.name) || empty(ruleForm.pass)) {
-    //     Modals.error("请填写用户名和密码")
-    //     return;
-    // }
-    // const values = Object.assign({},{"mobile":ruleForm.name,"password":ruleForm.pass})
-    // loginAdmin(values,function (result) {
-    //     console.log(result)
+    // const flag = await Modals.confirm("asdsd")
+    // if (flag) {
+    //     const token = "sd"
     //     const ex = 7 * 24 * 60 * 60 * 1000;
-    //     storage.set(ACCESS_TOKEN, result.token, ex);
-    //     storage.set(REFRESH_ACCESS_TOKEN, result.refresh_token, ex);
-    //     storage.set(CURRENT_USER, result.loginUser, ex);
-    // })
-    //router.replace('/userMain');
+    //     storage.set(ACCESS_TOKEN, token, ex);
+    //     router.replace('/userMain');
+    //     return;
+    // } 
+
+    if (empty(ruleForm.name) || empty(ruleForm.pass)) {
+        Modals.error("请填写用户名和密码")
+        return;
+    }
+    const values = Object.assign({},{"mobile":ruleForm.name,"password":ruleForm.pass})
+    loginAdmin(values,function (result) {
+        console.log(result)
+        const ex = 7 * 24 * 60 * 60 * 1000;
+        storage.set(ACCESS_TOKEN, result.token, ex);
+        storage.set(REFRESH_ACCESS_TOKEN, result.refresh_token, ex);
+        storage.set(CURRENT_USER, result.loginUser, ex);
+        router.replace('/userMain');
+    })
 }
 
 function loginAdmin(params,callback){

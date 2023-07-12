@@ -1,0 +1,35 @@
+const tableHeader = [
+  {
+    prop:'testTime',
+    label:'测试时间',
+  },
+  {
+    prop:'pcbaId',
+    label:'板卡Id',
+  },
+  {
+    prop:'eikCode',
+    label:'易客编码',
+  },
+  {
+    prop:'factoryName',
+    label:'工厂名称',
+  },
+  {
+    prop:'elapsedTime',
+    label:'花费测试时间',
+  },
+  {
+    prop:'productDetail',
+    label:'产品详情',
+  },
+  {
+    prop:'testStatus',
+    label:'测试结果',
+  },
+  {
+    prop:'operation',
+    label:'操作',
+  },
+]
+export default tableHeader;

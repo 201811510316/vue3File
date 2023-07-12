@@ -15,6 +15,7 @@
     "element-plus": "^2.3.6",
     "element-ui": "2.3.9",
     "less-loader": "^11.1.1",
+    "node-polyfill-webpack-plugin": "^2.0.1",
     "normalize.css": "^8.0.1",
     "qs": "^6.11.2",
     "vue": "^3.2.13",
