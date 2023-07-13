@@ -7,9 +7,9 @@
             <el-breadcrumb-item :to="current.path" v-if="current">
                 {{ current.fatcher }}
             </el-breadcrumb-item>
-            <el-breadcrumb-item :to="current.path" v-if=" current">
+            <!-- <el-breadcrumb-item :to="current.path" v-if=" current">
                 {{ current.fatcher2 }}
-            </el-breadcrumb-item>
+            </el-breadcrumb-item> -->
             <el-breadcrumb-item :to="current.path" v-if="current">
                 {{ current.label }}
             </el-breadcrumb-item>
@@ -17,15 +17,13 @@
     </div>
 </template>
 
-<script>
-import { mapState } from 'vuex'
-export default {
-    computed: {
-        ...mapState({
-            current: state => state.tag.currentMenu
-        })
-    },
-}
+<script setup>
+import { ref, computed, watch } from 'vue'
+import { useStore } from 'vuex'
+
+const store = useStore()
+const current = computed(() => store.state.tag.currentMenu);
+
 </script>
    
 <style lang="less" scoped>
