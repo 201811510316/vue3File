@@ -87,6 +87,10 @@ function resetForm(){
 function getData(){
     return ruleForm.data
 }
+function setData(params){
+    ruleForm.data = params;
+}
+
 function show() {
     popViewModalRef.value.showForm();
 }
@@ -96,7 +100,8 @@ function close(){
 defineExpose({
     show,
     close,
-    getData
+    getData,
+    setData
 })
 
 </script>

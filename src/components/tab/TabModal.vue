@@ -45,11 +45,20 @@ export default {
         this.$router.push({ name: this.tags[index].name })
       }
     },
-
+    
     //选择标签跳转路由
     changeMenu(item) {
       this.$router.push({ name: item.name })
       store.commit('selectMenu', item)
+    }
+  },
+
+  watch:{
+    tags:{
+      handler(newValue) {
+        console.log(newValue)
+      },
+      
     }
   }
 }

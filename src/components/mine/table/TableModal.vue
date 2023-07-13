@@ -2,7 +2,7 @@
     <div class="table-container">
       <el-table
         :data="tableData"
-        style="width:100%"
+        style="width:100%; height: 60%;"
         :header-cell-class-name="headerBg ? 'headerCell':''"
         :row-key="rowKey"
         @selection-change="handleSelectionChange"
@@ -57,11 +57,11 @@
         <el-pagination
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
-            :current-page="pagination.pageNo"
+            :current-page="pagina.pageNo"
             :page-sizes="[10, 20, 50, 100]"
-            :page-size="pagination.pageSize"
+            :page-size="pagina.pageSize"
             layout="total, sizes, prev, pager, next, jumper"
-            :total="pagination.total"
+            :total="pagina.total"
         />
       </template>
     </div>
@@ -92,7 +92,7 @@ const prop = defineProps({
     maxHeight: {
       //最大高度
       type: String,
-      default: '600',
+      default: '560',
     },
     stripe: {
       //是否显示斑马纹
@@ -165,7 +165,6 @@ const tableData = ref();
 const pagination = reactive({
     pageNo:1,
     pageSize:10,
-    total:10
 })
 
 // 多选

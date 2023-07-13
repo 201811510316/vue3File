@@ -7,6 +7,8 @@
                         ref="formModalRef"
                         :rules="stateData.rules"
                         :formList="stateData.formList"
+                        :options="stateData.options"
+                        @on-ok="subminData"
                     />
                 </div>
             </el-card>
@@ -20,10 +22,8 @@
                     :columns="tableHeader" 
                     :dataList="tableData" 
                     :pagina="pagina" 
-                    :index="true" 
-                    indexLabel="序号" 
-                    maxHeight="600" 
-                    @selectionChange="selectChange"
+                    :index="false" 
+                    maxHeight="560" 
                     @pageChange="pageChange"
                     @pageNo="pageNo"
                 >
@@ -55,6 +55,8 @@
                 </TableModal>
             </el-card>
         </div>
+        <AddDataModal ref="addDataModalRef"/>
+        <DetailModal ref="detailModalRef"/>
     </div>
 </template>
 
@@ -65,9 +67,9 @@ import FormModal from '@/components/mine/form/FormModal.vue';
 import tableHeader from './common/column';
 import stateData from "./common/stateData";
 import { ApiClient } from '@/utils/ApiClient';
+import DetailModal from "@/view/mine/lianxi-4/DetailModal.vue";
+import AddDataModal from './AddDataModal.vue';
 
-const indexAddModalRef = ref()
-const indexDetailsModalRef = ref();
 const formModalRef = ref()
 const tableData = ref([]);
 const pagina = reactive({
@@ -79,11 +81,9 @@ const page = ref({
     pageNo: 1,
     pageSize: 10,
 })
+const detailModalRef = ref();
+const addDataModalRef = ref()
 
-// 多选
-function selectChange(index) {
-    console.log(index)
-}
 // 分页
 async function pageChange(index) {
     page.value.pageNo = index.pageNo;
@@ -105,9 +105,8 @@ async function pageNo(index){
 }
 // 查看详情
 function getDetails(index){
-    console.log(index)
-    indexDetailsModalRef.value.show()
-    indexDetailsModalRef.value.onLoad(index)
+    detailModalRef.value.show();
+    detailModalRef.value.onLoad(index)
 }
 // 编辑
 function getEdit(index){
@@ -119,7 +118,7 @@ function getDetele(index){
 }
 // 弹出添加列表窗口
 function addForm() {
-    indexAddModalRef.value.addShow();
+    addDataModalRef.value.addShow()
 }
 // 获取分页数据
 function gird(params){
@@ -130,6 +129,10 @@ function gird(params){
          resolve(response);
       })
     })
+}
+// 获取搜索框数据
+function subminData(params){
+    console.log(params)
 }
 
 onMounted( async()=>{

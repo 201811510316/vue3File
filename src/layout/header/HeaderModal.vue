@@ -31,6 +31,8 @@ import {ref} from 'vue';
 import {useRouter} from "vue-router";
 import DialogForm from '@/components/Dialog/DialogForm.vue';
 import BreadcrumbModal from '@/components/Breadcrumb/BreadcrumbModal.vue';
+import { storage } from '@/utils/storage';
+import {ACCESS_TOKEN, REFRESH_ACCESS_TOKEN, CURRENT_USER} from '@/store/mutation-types';
 
 const emit = defineEmits(['emitDemo'])
 const router = useRouter();
@@ -42,6 +44,9 @@ function rePass(){
 }
 // 登出
 function logout() {
+    storage.remove(ACCESS_TOKEN);
+    storage.remove(CURRENT_USER);
+    storage.remove(REFRESH_ACCESS_TOKEN);
     router.replace("/")
 }
 function isCollapseFunction(){

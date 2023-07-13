@@ -3,10 +3,12 @@
       <div class="my-12 mx-4">
           <el-card class="box-card">
               <div class="text item">
-                  <FormModal
+                  <!-- 搜索框 -->
+                <FormModal
                     ref="formModalRef"
                     :rules="formDataState.rules"
                     :formList="formDataState.formList"
+                    @on-ok="subminData"
                   />
               </div>
           </el-card>
@@ -16,14 +18,13 @@
               <div class="mb-4">
                 <el-button type="primary" @click="addForm">添加</el-button>
               </div>
+              <!-- 列表 -->
               <TableModal 
                 :columns="tableHeader" 
                 :dataList="tableData" 
                 :pagina="pagina" 
-                :index="true" 
-                indexLabel="序号" 
-                maxHeight="600" 
-                @selectionChange="selectChange"
+                :index="false" 
+                maxHeight="560" 
                 @pageChange="pageChange"
                 @pageNo="pageNo"
               >
@@ -55,7 +56,9 @@
               </TableModal>
           </el-card>
       </div>
+      <!-- 添加弹窗 -->
       <IndexAddModal ref="indexAddModalRef"/>
+      <!-- 详情弹窗 -->
       <IndexDetailsModal ref="indexDetailsModalRef"/>
     </div>
 </template>
@@ -69,95 +72,7 @@ import IndexAddModal from "./IndexAddModal.vue"
 import IndexDetailsModal from './IndexDetailsModal.vue';
 import formDataState from "./common/formDataState";
 import { ApiClient } from '@/utils/ApiClient';
-
-// 表格所需的数据
-// const tableData = reactive([
-//         {
-//           serviceId:'001',
-//           service:'苏无名',
-//           mobile:'135111111111',
-//           address:'aaa',
-//           company:'xxx',
-//           job:'xxx-1'
-//         },
-//         {
-//           serviceId:'002',
-//           service:'卢凌风',
-//           mobile:'135222222222',
-//           address:'bbb',
-//           company:'xxx',
-//           job:'xxx-2'
-//         },
-//         {
-//           serviceId:'003',
-//           service:'裴喜君',
-//           mobile:'135111111111',
-//           address:'ccc',
-//           company:'xxx',
-//           job:'xxx-3'
-//         },
-//         {
-//           serviceId:'004',
-//           service:'的法国红酒看来',
-//           mobile:'135111111111',
-//           address:'ddd',
-//           company:'xxx',
-//           job:'xxx-1'
-//         },
-//         {
-//           serviceId:'005',
-//           service:'薛环',
-//           mobile:'135111111111',
-//           address:'aaa',
-//           company:'xxx',
-//           job:'xxx-1'
-//         },
-//         {
-//           serviceId:'006',
-//           service:'裴坚',
-//           mobile:'135111111111',
-//           address:'aaa',
-//           company:'xxx',
-//           job:'xxx-1'
-//         },
-//         {
-//           serviceId:'007',
-//           service:'证先从',
-//           mobile:'135111111111',
-//           address:'aaa',
-//           company:'xxx',
-//           job:'xxx-1'
-//         },
-//         {
-//           serviceId:'008',
-//           service:'选项',
-//           mobile:'135111111111',
-//           address:'aaa',
-//           company:'xxx',
-//           job:'xxx-1'
-//         },
-//         {
-//           serviceId:'009',
-//           service:'企微端',
-//           mobile:'135111111111',
-//           address:'aaa',
-//           company:'xxx',
-//           job:'xxx-1'
-//         },
-//         {
-//           serviceId:'010',
-//           service:'三重门',
-//           mobile:'135111111111',
-//           address:'aaa',
-//           company:'xxx',
-//           job:'xxx-1'
-//         },
-// ]);
-// const pagina = reactive({
-//       pageNo: 1,
-//       pageSize: 10,
-//       total: 15,
-// })
+import Modals from '@/utils/Modals';
 
 const tableData = ref([]);
 const pagina = reactive({
@@ -165,48 +80,63 @@ const pagina = reactive({
     pageSize:0,
     total:0
 })
-
 const formModalRef = ref()
 const indexAddModalRef = ref()
 const indexDetailsModalRef = ref();
-
-// 多选
-function selectChange(index) {
-    console.log(index)
-}
+const page = ref({
+    pageNo: 1,
+    pageSize: 10,
+})
 // 分页
-function pageChange(index) {
-    console.log(index)
+async function pageChange(index) {
+    page.value.pageNo = index.pageNo;
+    page.value.pageSize = index.pageSize;
+    const bean = await gird({...page.value});
+    tableData.value = bean.data;
+    pagina.pageNo = bean.pageNo;
+    pagina.total = bean.totalSize;
+    pagina.pageSize = bean.pageSize;
 }
 // 翻页
-function pageNo(index){
-    console.log(index)
+async function pageNo(index){
+    page.value.pageNo = index.pageNo;
+    const bean = await gird({...page.value});
+    tableData.value = bean.data;
+    pagina.pageNo = bean.pageNo;
+    pagina.total = bean.totalSize;
+    pagina.pageSize = bean.pageSize;
 }
-
 // 查看详情
 function getDetails(index){
-    console.log(index)
     indexDetailsModalRef.value.show()
     indexDetailsModalRef.value.onLoad(index)
 }
 // 编辑
 function getEdit(index){
-    console.log(index)
+    const edit = Object.assign({},{
+      mobile: "dv",
+      name: "dvdv",
+      option: "a"
+    })
+    indexAddModalRef.value.addShow();
+    indexAddModalRef.value.onLoad(edit);
 }
 // 删除
-function getDetele(index){
-    console.log(index)
+async function getDetele(index){
+    const flag = await Modals.confirm("是否要删除该记录["+ index.factoryName +"]?");
+    if (flag) {
+      console.log(index)
+    }
 }
-
 // 弹出添加列表窗口
 function addForm() {
     indexAddModalRef.value.addShow();
 }
-
-const page = ref({
-    pageNo: 1,
-    pageSize: 10,
-})
+// 获取搜索框数据
+function subminData(params){
+    console.log(params)
+}
+// 获取分页数据
 function gird(params){
     return new Promise((resolve)=>{
       const client = new ApiClient();

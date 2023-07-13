@@ -8,7 +8,7 @@
     />
 </template>
 <script setup>
-import { ref, provide } from 'vue'
+import { ref, provide} from 'vue'
 import PopFormModal from '@/components/mine/form/PopFormModal.vue';
 import state from './common/stateData';
 import empty from '@/utils/empty';
@@ -30,14 +30,8 @@ function addShow(){
     popFormModalRef.value.show()
 }
 
-// 编辑时获取数据
-function onLoad(params){
-    popFormModalRef.value.setData(params)
-}
-
 defineExpose({
-    addShow,
-    onLoad
+    addShow
 })
 
 </script>

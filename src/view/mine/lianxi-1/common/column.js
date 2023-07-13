@@ -1,39 +1,18 @@
 const tableHeader = [
-  // {
-  //   prop:'service',
-  //   label:'名称',
-  // },
-  // {
-  //   prop:'mobile',
-  //   label:'手机号',
-  // },
-  // {
-  //   prop:'address',
-  //   label:'地址',
-  // },
-  // {
-  //   prop:'company',
-  //   label:'公司',
-  // },
-  // {
-  //   prop:'job',
-  //   label:'岗位',
-  // },
-  // {
-  //   prop:'operation',
-  //   label:'操作',
-  // },
   {
     prop:'factoryName',
     label:'工厂名称',
+    width:250
   },
   {
     prop:'factoryAddress',
     label:'工厂地址',
+    width:450
   },
   {
     prop:'factoryCodeStr',
     label:'工厂编码',
+    width:180
   },
   {
     prop:'registerUser',
@@ -46,6 +25,10 @@ const tableHeader = [
   {
     prop:'registerGender',
     label:'性别',
+    render(row){
+        console.log(row.registerGender)
+        return row.registerGender;
+    }
   },
   {
     prop:'createTime',

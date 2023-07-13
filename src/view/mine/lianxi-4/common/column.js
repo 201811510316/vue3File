@@ -2,14 +2,17 @@ const tableHeader = [
   {
     prop:'testTime',
     label:'测试时间',
+    width: 180
   },
   {
     prop:'pcbaId',
-    label:'板卡Id',
+    label:'Id',
+    width: 180
   },
   {
     prop:'eikCode',
-    label:'易客编码',
+    label:'编号',
+    width: 250
   },
   {
     prop:'factoryName',
