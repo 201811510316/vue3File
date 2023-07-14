@@ -14,53 +14,40 @@
         </el-tag>
     </div>
 </template>
-<script>
-import { mapState, mapMutations } from 'vuex'
-import store from '@/store';
 
-export default {
-  computed: {
-    ...mapState({
-      tags: state => state.tag.tabsList
-    })
-  },
-  methods: {
-    ...mapMutations({
-      close: 'closeTab'
-    }),
-    //关闭标签
-    handleClose(tag, index) {
-      let length = this.tags.length - 1
-      //vuex调方法的另一种写法
-      this.close(tag)
-      // 如果关闭的标签不是当前路由的话，就不跳转
-      if (tag.name !== this.$route.name) {
-        return
-      }
-      // 关闭的标签是最右边的话，往左边跳转一个
-      if (index === length) {
-        this.$router.push({ name: this.tags[index - 1].name })
-      } else {
+<script setup>
+import { ref, reactive, computed } from 'vue';
+import { useStore } from 'vuex'
+import { useRouter, useRoute } from "vue-router";
+
+const router = useRouter();
+const route = useRoute();
+const store = useStore();
+const tags = computed(() => store.state.tag.tabsList);
+
+function close(index){
+    store.commit('closeTab',index);
+}
+function handleClose(item, index) {
+    let length = this.tags.length - 1;
+    // 关闭标签
+    close(item)
+    // 如果关闭的标签不是当前路由的话，就不跳转
+    if (item.name != route.name) {
+        return;
+    }
+    // 关闭的标签是最右边的话，往左边跳转一个
+    if (index === length) {
+        router.push({ name: this.tags[index - 1].name })
+    } else {
         // 否则往右边跳转
-        this.$router.push({ name: this.tags[index].name })
-      }
-    },
-    
-    //选择标签跳转路由
-    changeMenu(item) {
-      this.$router.push({ name: item.name })
-      store.commit('selectMenu', item)
+        router.push({ name: this.tags[index].name })
     }
-  },
-
-  watch:{
-    tags:{
-      handler(newValue) {
-        console.log(newValue)
-      },
-      
-    }
-  }
+}
+//选择标签跳转路由
+function changeMenu(item) {
+    router.push({ name: item.name })
+    store.commit('selectMenu', item)
 }
 
 </script>
