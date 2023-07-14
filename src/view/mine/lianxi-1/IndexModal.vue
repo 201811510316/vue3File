@@ -9,7 +9,7 @@
                     :rules="formDataState.rules"
                     :formList="formDataState.formList"
                     @on-ok="subminData"
-                  />
+                />
               </div>
           </el-card>
       </div>
@@ -28,6 +28,14 @@
                 @pageChange="pageChange"
                 @pageNo="pageNo"
               >
+                  <template #registerGender="scope">
+                      <div v-if="scope.row.registerGender === 1">
+                          男
+                      </div>
+                      <div v-else>
+                          女
+                      </div>
+                  </template>
                   <template #operation="scope">
                       <el-button link type="primary" style="margin-right: 0.75rem;" @click="getDetails(scope.row)">查看详情</el-button>
                       <el-dropdown style="margin-top: 0.25rem;">

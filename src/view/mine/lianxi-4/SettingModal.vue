@@ -27,6 +27,14 @@
                     @pageChange="pageChange"
                     @pageNo="pageNo"
                 >
+                    <template #testStatus="scope">
+                        <div v-if="scope.row.testStatus === 1">
+                            成功
+                        </div>
+                        <div v-else>
+                            失败
+                        </div>
+                    </template>
                     <template #operation="scope">
                         <el-button link type="primary" style="margin-right: 0.75rem;" @click="getDetails(scope.row)">查看详情</el-button>
                         <el-dropdown style="margin-top: 0.25rem;">

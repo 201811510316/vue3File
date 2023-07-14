@@ -25,10 +25,6 @@ const tableHeader = [
   {
     prop:'registerGender',
     label:'性别',
-    render(row){
-        console.log(row.registerGender)
-        return row.registerGender;
-    }
   },
   {
     prop:'createTime',
